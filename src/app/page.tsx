@@ -1,88 +1,101 @@
-import DensitySmallIcon from "@mui/icons-material/DensitySmall";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ShoppingCart, List, UserRound } from "lucide-react";
 import MainPage from "@/components/MainPage";
-import PersonIcon from "@mui/icons-material/Person";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerPortal,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      <div className="drawer">
-        <input className="drawer-toggle" type="checkbox" id="my-drawer" />
-        <div className="drawer-content flex flex-col">
-          <header className="navbar max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto">
-            <div className="navbar-start lg:hidden">
-              <div className="flex-none">
-                <label
-                  htmlFor="my-drawer"
-                  aria-label="open sidebar"
-                  className="btn btn-ghost btn-circle"
-                >
-                  <DensitySmallIcon />
-                </label>
-              </div>
+      <Drawer direction="left">
+        <header className="navbar max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto">
+          <div className="navbar-start lg:hidden">
+            <div className="flex-none">
+              <DrawerTrigger asChild>
+                <Button>
+                  <List />
+                </Button>
+              </DrawerTrigger>
             </div>
-            <div className="lg:navbar-start max-lg:navbar-center">
-              <a className="text-xl text-black">LOGO</a>
-            </div>
-            <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal px-1 text-black font-semibold">
-                <li>
-                  <a>Viagens</a>
-                </li>
-                <li>
-                  <a>Hotéis</a>
-                </li>
-                <li>
-                  <a>Pacotes para Família</a>
-                </li>
-                <li>
-                  <a>Promoções</a>
-                </li>
-                <li>
-                  <a>Ajuda</a>
-                </li>
-              </ul>
-            </div>
-            <div className="navbar-end">
-              <div>
-                <button className="btn btn-ghost btn-circle">
-                  <div className="indicator text-black">
-                    <PersonIcon />
-                  </div>
-                </button>
-              </div>
+          </div>
+          <div className="lg:navbar-start max-lg:navbar-center">
+            <a className="text-xl text-black">LOGO</a>
+          </div>
+          <div className="navbar-center hidden lg:flex">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger>Viagens</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <NavigationMenuLink asChild>
+                      <Link href="/">Internacionais</Link>
+                    </NavigationMenuLink>
+                    <NavigationMenuLink>
+                      <Link href="/">Nacionais</Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link href="/" className={navigationMenuTriggerStyle()}>
+                      Hoteis
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link href="/" className={navigationMenuTriggerStyle()}>
+                      Pacotes para Familia
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link href="/" className={navigationMenuTriggerStyle()}>
+                      Ajuda
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+          <div className="navbar-end">
+            <div>
               <button className="btn btn-ghost btn-circle">
                 <div className="indicator text-black">
-                  <ShoppingCartIcon />
+                  <UserRound />
                 </div>
               </button>
             </div>
-          </header>
-
-          <MainPage />
-        </div>
-        <div className="drawer-side">
-          <label
-            htmlFor="my-drawer"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          <ul
-            tabIndex={-1}
-            className="menu bg-gray-200 text-black min-h-full w-80 p-4"
-          >
-            <li>
-              <a>Home</a>
-            </li>
-            <li>
-              <a>Portfolio</a>
-            </li>
-            <li>
-              <a>About</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+            <button className="btn btn-ghost btn-circle">
+              <div className="indicator text-black">
+                <ShoppingCart />
+              </div>
+            </button>
+          </div>
+        </header>
+        <DrawerPortal>
+          <DrawerContent className="w-96 h-full">
+            <DrawerHeader>Olá! Seja bem-vindo!</DrawerHeader>
+          </DrawerContent>
+        </DrawerPortal>
+        <MainPage />
+      </Drawer>
     </>
   );
 }
