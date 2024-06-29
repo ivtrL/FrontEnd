@@ -9,17 +9,19 @@ export default function Home() {
       <div className="drawer">
         <input className="drawer-toggle" type="checkbox" id="my-drawer" />
         <div className="drawer-content flex flex-col">
-          <header className="navbar w-3/4 mx-auto">
-            <div className="flex-none lg:hidden">
-              <label
-                htmlFor="my-drawer"
-                aria-label="open sidebar"
-                className="btn btn-ghost btn-circle"
-              >
-                <DensitySmallIcon />
-              </label>
+          <header className="navbar max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto">
+            <div className="navbar-start lg:hidden">
+              <div className="flex-none">
+                <label
+                  htmlFor="my-drawer"
+                  aria-label="open sidebar"
+                  className="btn btn-ghost btn-circle"
+                >
+                  <DensitySmallIcon />
+                </label>
+              </div>
             </div>
-            <div className="lg:navbar-start">
+            <div className="lg:navbar-start max-lg:navbar-center">
               <a className="text-xl text-black">LOGO</a>
             </div>
             <div className="navbar-center hidden lg:flex">

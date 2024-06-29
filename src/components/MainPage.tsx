@@ -1,26 +1,27 @@
 "use client";
-import { motion, useMotionValue, useMotionValueEvent } from "framer-motion";
+import { animate, motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
+import useMeasure from "react-use-measure";
 import SearchIcon from "@mui/icons-material/Search";
 
-const imgs = ["/praia.jpg", "/rio.jpg", "/SP.jpg"];
+const imgs = [
+  { src: "/praia.jpg", title: "Praias de Maceió" },
+  { src: "/rio.jpg", title: "Rio de Janeiro" },
+  { src: "/SP.jpg", title: "São Paulo" },
+];
 
 const DRAG_BUFFER = 100;
+const ONE_SECOND = 1000;
+const INTERVAL = 10 * ONE_SECOND;
 
 export default function MainPage() {
-  const [dragging, setDragging] = useState(false);
+  const [_dragging, setDragging] = useState(false);
   const [imgIndex, setImgIndex] = useState(0);
 
-  const dragX = useMotionValue(0);
-  const dragXProgress = useMotionValue(0);
+  const [ref, { width }] = useMeasure();
 
-  useMotionValueEvent(dragX, "change", (x) => {
-    if (typeof x === "number" && dragging) {
-      dragXProgress.set(x);
-    } else {
-      dragXProgress.set(0);
-    }
-  });
+  const dragX = useMotionValue(0);
+
   const onDragStart = () => {
     setDragging(true);
   };
@@ -39,35 +40,31 @@ export default function MainPage() {
 
   useEffect(() => {
     const intervalRef = setInterval(() => {
-      const x = dragXProgress.get();
-
-      if (x === 0) {
-        setImgIndex((prev) => {
-          if (prev === imgs.length - 1) {
-            return 0;
-          }
-          return prev + 1;
-        });
-      }
-    }, 10000);
+      setImgIndex((prev) => {
+        if (prev === imgs.length - 1) {
+          return 0;
+        }
+        return prev + 1;
+      });
+    }, INTERVAL);
 
     return () => {
       clearInterval(intervalRef);
     };
-  }, []);
+  }, [imgIndex]);
 
   return (
     <main className="relative w-3/4 mx-auto top-24 flex flex-col">
       <div className="w-3/4 mx-auto gap-6 flex flex-col items-center">
         <div className="flex flex-col items-center">
-          <h1 className="text-4xl font-bold text-black">
+          <h1 className="text-4xl text-center font-bold text-black">
             Você procura, nos encontramos.
           </h1>
-          <p className="text-lg text-gray-500">
+          <p className="text-lg text-center text-gray-500">
             Encontre o lugar perfeito para sua viagem.
           </p>
         </div>
-        <label className="input input-bordered input-lg bg-white flex items-center gap-2 w-3/4 rounded-full shadow-lg">
+        <label className="input input-bordered input-lg bg-white flex items-center gap-2 max-w-7xl w-full rounded-full shadow-lg min-w-96">
           <input
             type="text"
             placeholder="Aonde você quer ir? Hotéis, Pousadas, Cidades..."
@@ -96,14 +93,21 @@ export default function MainPage() {
         >
           {imgs.map((img, index) => (
             <div
-              style={{
-                backgroundImage: `url(${img})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
               key={index}
-              className="aspect-video w-full shrink-0 h-[460px] object-cover"
-            />
+              className="aspect-video w-full shrink-0 h-[460px] relative text-center"
+            >
+              <h1 className="absolute bottom-6 left-8 text-white text-4xl font-bold">
+                {img.title}
+              </h1>
+              <div
+                style={{
+                  backgroundImage: `url(${img.src})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+                className="h-full object-cover shadow-vignette"
+              />
+            </div>
           ))}
         </motion.div>
       </div>
