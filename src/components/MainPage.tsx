@@ -1,8 +1,20 @@
 import * as React from "react";
 import { Search } from "lucide-react";
-import BannerComponent from "./ui/BannerComponent";
+import { BannerComponent, BannerProgress } from "./Banner";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { Carousel, CarouselContent } from "./ui/carousel";
+import CardItem from "./ui/carditem";
+import Image from "next/image";
+
+const imagens = [
+  "/card1.jpg",
+  "/card2.jpg",
+  "/card3.jpg",
+  "/card4.jpg",
+  "/card5.jpg",
+  "/card6.jpg",
+];
 
 export default function MainPage() {
   return (
@@ -28,7 +40,28 @@ export default function MainPage() {
           </Button>
         </label>
       </div>
-      <BannerComponent />
+      <Carousel>
+        <BannerComponent className="mt-16" />
+        <BannerProgress />
+      </Carousel>
+      <div>
+        <Carousel>
+          <CarouselContent>
+            {imagens.map((imagem, index) => {
+              return (
+                <CardItem key={index} size="lg">
+                  <Image
+                    src={imagem}
+                    fill
+                    alt={`imagem ${index + 1}`}
+                    className="w-full h-full"
+                  />
+                </CardItem>
+              );
+            })}
+          </CarouselContent>
+        </Carousel>
+      </div>
     </main>
   );
 }

@@ -31,7 +31,7 @@ type CarouselContextProps = {
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
-export function useCarousel() {
+function useCarousel() {
   const context = React.useContext(CarouselContext);
 
   if (!context) {
@@ -248,6 +248,7 @@ CarouselNext.displayName = "CarouselNext";
 
 export {
   type CarouselApi,
+  useCarousel,
   Carousel,
   CarouselContent,
   CarouselItem,
