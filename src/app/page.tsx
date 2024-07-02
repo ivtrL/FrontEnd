@@ -23,11 +23,11 @@ export default function Home() {
   return (
     <>
       <Drawer direction="left">
-        <header className="navbar max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto">
+        <header className="navbar max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto mb-16">
           <div className="navbar-start lg:hidden">
             <div className="flex-none">
               <DrawerTrigger asChild>
-                <Button>
+                <Button variant="secondary">
                   <List />
                 </Button>
               </DrawerTrigger>
