@@ -3,7 +3,7 @@ import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
@@ -181,7 +181,11 @@ const CarouselItem = React.forwardRef<
       ref={ref}
       role="group"
       aria-roledescription="slide"
-      className={cn("min-w-0 shrink-0 grow-0 basis-full", className)}
+      className={cn(
+        "min-w-0 shrink-0 grow-0 basis-full",
+        orientation === "horizontal" ? "pl-4" : "pt-4",
+        className
+      )}
       {...props}
     />
   );
@@ -200,15 +204,17 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute",
-        orientation === "horizontal" ? "top-0" : "-top-12 left-1/2 rotate-90",
+        "absolute w-16",
+        orientation === "horizontal"
+          ? "left-0 top-1/2 -translate-y-1/2"
+          : "top-0 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-6 w-6" />
+      <ChevronLeft className="h-10 w-10" />
     </Button>
   );
 });
@@ -226,17 +232,17 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute",
+        "absolute w-16",
         orientation === "horizontal"
-          ? "top-0"
-          : "-bottom-12 left-1/2 rotate-90",
+          ? "right-0 top-1/2 -translate-y-1/2"
+          : "bottom-0 left-1/2 -translate-x-1/2",
         className
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-6 w-6" />
+      <ChevronRight className="h-10 w-10" />
     </Button>
   );
 });
