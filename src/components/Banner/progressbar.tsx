@@ -62,25 +62,26 @@ const ProgressBar = React.forwardRef<
   const ArraySnaps = api.scrollSnapList();
 
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isSelected) setValue(0);
-      if (isSelected) {
-        if (value === 100) {
-          setValue(0);
-          if (index === ArraySnaps.length - 1) {
-            api.scrollTo(0);
-          } else {
-            api.scrollTo(index + 1);
-          }
-        } else {
-          setValue((prev) => prev + 1);
-        }
+    if (!isSelected) {
+      setValue(0);
+      return () => {};
+    }
+    if (value === 100) {
+      setValue(0);
+      if (index === ArraySnaps.length - 1) {
+        api.scrollTo(0);
+      } else {
+        api.scrollTo(index + 1);
       }
+      return () => {};
+    }
+    const interval = setInterval(() => {
+      setValue((prev) => prev + 1);
     }, timer);
     return () => {
       clearInterval(interval);
     };
-  }, [ArraySnaps, api, index, isSelected, timer, value]);
+  }, [isSelected, value]);
 
   return <Progress {...props} ref={ref} value={value} />;
 });
