@@ -18,8 +18,8 @@ export default function MainPage() {
       <Carousel opts={{ loop: true }} className="group">
         <BannerComponent />
         <BannerProgress />
-        <CarouselNext className="h-full bg-transparent border-0 text-white rounded-none" />
-        <CarouselPrevious className="h-full bg-transparent border-0 text-white rounded-none" />
+        <CarouselNext className="h-full w-16 bg-transparent border-0 text-white rounded-none" />
+        <CarouselPrevious className="h-full w-16 bg-transparent border-0 text-white rounded-none" />
       </Carousel>
       <div className="w-3/4 mx-auto flex flex-col mt-20">
         <div className="w-3/4 mx-auto gap-6 flex flex-col items-center">
@@ -63,8 +63,8 @@ export default function MainPage() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselNext className="right-0 top-1/3 translate-x-1/2 rounded-full border-2 text-black hover:bg-gray-200 disabled:invisible transition-all" />
-            <CarouselPrevious className="top-1/3 -translate-x-1/2 rounded-full border-2 text-black hover:bg-gray-200 disabled:invisible transition-all" />
+            <CarouselNext className="translate-x-1/2 rounded-full border-2 text-black hover:bg-gray-200 disabled:invisible transition-all" />
+            <CarouselPrevious className="-translate-x-1/2 rounded-full border-2 text-black hover:bg-gray-200 disabled:invisible transition-all" />
           </Carousel>
         </div>
       </div>
