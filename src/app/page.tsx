@@ -6,6 +6,7 @@ import {
   DrawerPortal,
 } from "@/components/ui/drawer";
 import { HeaderComponent } from "@/components/Header";
+import { FooterComponent } from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         </DrawerPortal>
         <MainPage />
       </Drawer>
+      <FooterComponent />
     </>
   );
 }
