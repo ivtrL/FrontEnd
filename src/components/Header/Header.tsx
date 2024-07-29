@@ -190,8 +190,14 @@ export const HeaderComponent = () => {
             </NavigationMenu>
           </div>
           <div className="navbar-end">
+            
             <div>
-              <button className="btn btn-ghost btn-circle hover:bg-gray-200/70 active:bg-gray-200 group">
+              <button className="btn btn-ghost btn-circle  hover:bg-gray-200/70 dropdown dropdown-hover active:bg-gray-200 group">
+              <ul tabIndex={0} className="dropdown-content menu bg-white rounded-md z-[1] w-52 p-2 shadow"
+               style={{ top: '100%' }}>
+                <li><a className="text-black"> Cadastre-se</a></li>
+                 <li><a className="text-black">Login</a></li>
+              </ul>
                 <div
                   className={`indicator ${
                     color ? "text-black" : "text-white"
