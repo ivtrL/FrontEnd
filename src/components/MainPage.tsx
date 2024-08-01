@@ -24,7 +24,7 @@ export default function MainPage() {
       <div className="w-3/4 mx-auto flex flex-col mt-20">
         <div className="w-3/4 mx-auto gap-6 flex flex-col items-center">
           <div className="flex flex-col items-center">
-            <h1 className="text-6xl text-center font-bold text-black tracking-tighter">
+            <h1 className="text-5xl mb-4 text-center font-bold text-black tracking-tighter">
               Você procura, nós encontramos.
             </h1>
             <p className="text-lg text-center text-gray-500">
