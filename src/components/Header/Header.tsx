@@ -66,9 +66,8 @@ export const HeaderComponent = () => {
         className={`fixed w-full z-20 transition-all duration-300 ${useShadowStyle()}`}
       >
         <div
-          className={`transition-all duration-300 z-10 navbar max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto p-0 ${
-            color ? "" : "my-4"
-          }`}
+          className={`transition-all duration-300 z-10 navbar max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto p-0 ${color ? "" : "my-4"
+            }`}
         >
           <div className="navbar-start lg:hidden">
             <div className="flex-none">
@@ -197,23 +196,32 @@ export const HeaderComponent = () => {
           <div className="navbar-end">
             <HoverCard openDelay={150}>
               <HoverCardTrigger asChild>
-                <button className="btn btn-ghost btn-circle  hover:bg-gray-200/70 active:bg-gray-200 group">
+                <button className="btn btn-ghost btn-circle hover:bg-gray-200/70 active:bg-gray-200 group">
                   <div
-                    className={`indicator ${
-                      color ? "text-black" : "text-white"
-                    } group-hover:text-black`}
+                    className={`indicator ${color ? "text-black" : "text-white"
+                      } group-hover:text-black`}
                   >
                     <UserRound />
                   </div>
                 </button>
               </HoverCardTrigger>
               <HoverCardContent>
-                <ul>
+                <ul className="space-y-2">
                   <li>
-                    <a className="text-black"> Cadastre-se</a>
+                    <a
+                      href="/register"
+                      className="text-black font-semibold block p-2 rounded-md hover:bg-gray-100 transition-colors duration-300 transform scale-100 "
+                    >
+                      Cadastre-se
+                    </a>
                   </li>
                   <li>
-                    <a className="text-black">Login</a>
+                    <a
+                      href="/login"
+                      className="text-black font-semibold block p-2 rounded-md hover:bg-gray-100 transition-colors duration-300 transform scale-100 "
+                    >
+                      Login
+                    </a>
                   </li>
                 </ul>
               </HoverCardContent>
@@ -221,9 +229,8 @@ export const HeaderComponent = () => {
 
             <button className="btn btn-ghost btn-circle hover:bg-gray-200/70 active:bg-gray-200 group">
               <div
-                className={`indicator ${
-                  color ? "text-black" : "text-white"
-                } group-hover:text-black`}
+                className={`indicator ${color ? "text-black" : "text-white"
+                  } group-hover:text-black`}
               >
                 <ShoppingCart />
               </div>
