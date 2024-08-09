@@ -3,6 +3,8 @@ import * as React from "react";
 import { DrawerTrigger } from "../ui/drawer";
 import { Button } from "../ui/button";
 import { List, ShoppingCart, UserRound } from "lucide-react";
+import iconepreto from "@/../public/iconepreto.png";
+import iconebranco from "@/../public/iconebranco.png";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,6 +24,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import Image from "next/image";
 
 export const HeaderComponent = () => {
   const { scrollY } = useScroll();
@@ -66,8 +69,9 @@ export const HeaderComponent = () => {
         className={`fixed w-full z-20 transition-all duration-300 ${useShadowStyle()}`}
       >
         <div
-          className={`transition-all duration-300 z-10 navbar max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto p-0 ${color ? "" : "my-4"
-            }`}
+          className={`transition-all duration-300 z-10 navbar max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto p-0 ${
+            color ? "" : "my-4"
+          }`}
         >
           <div className="navbar-start lg:hidden">
             <div className="flex-none">
@@ -79,9 +83,16 @@ export const HeaderComponent = () => {
             </div>
           </div>
           <div className="lg:navbar-start max-lg:navbar-center">
-            <a className={`text-xl ${color ? "text-black" : "text-white"}`}>
-              LOGO
-            </a>
+            <Link
+              href="/"
+              className={`text-xl ${color ? "text-black" : "text-white"}`}
+            >
+              <Image
+                src={color ? iconepreto : iconebranco}
+                className={color ? "h-16 w-16" : "h-20 w-20"}
+                alt="Logo"
+              />
+            </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <NavigationMenu>
@@ -198,8 +209,9 @@ export const HeaderComponent = () => {
               <HoverCardTrigger asChild>
                 <button className="btn btn-ghost btn-circle hover:bg-gray-200/70 active:bg-gray-200 group">
                   <div
-                    className={`indicator ${color ? "text-black" : "text-white"
-                      } group-hover:text-black`}
+                    className={`indicator ${
+                      color ? "text-black" : "text-white"
+                    } group-hover:text-black`}
                   >
                     <UserRound />
                   </div>
@@ -209,8 +221,8 @@ export const HeaderComponent = () => {
                 <ul className="space-y-2">
                   <li>
                     <a
-                      href="/register"
-                      className="text-black font-semibold block p-2 rounded-md hover:bg-gray-100 transition-colors duration-300 transform scale-100 "
+                      href="/cadastro"
+                      className="text-black font-semibold block p-2 rounded-md hover:bg-gray-100 transition-colors duration-200 transform scale-100"
                     >
                       Cadastre-se
                     </a>
@@ -218,7 +230,7 @@ export const HeaderComponent = () => {
                   <li>
                     <a
                       href="/login"
-                      className="text-black font-semibold block p-2 rounded-md hover:bg-gray-100 transition-colors duration-300 transform scale-100 "
+                      className="text-black font-semibold block p-2 rounded-md hover:bg-gray-100 transition-colors duration-200 transform scale-100"
                     >
                       Login
                     </a>
@@ -229,8 +241,9 @@ export const HeaderComponent = () => {
 
             <button className="btn btn-ghost btn-circle hover:bg-gray-200/70 active:bg-gray-200 group">
               <div
-                className={`indicator ${color ? "text-black" : "text-white"
-                  } group-hover:text-black`}
+                className={`indicator ${
+                  color ? "text-black" : "text-white"
+                } group-hover:text-black`}
               >
                 <ShoppingCart />
               </div>
