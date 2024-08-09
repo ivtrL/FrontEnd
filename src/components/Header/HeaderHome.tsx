@@ -2,7 +2,7 @@
 import * as React from "react";
 import { DrawerTrigger } from "../ui/drawer";
 import { Button } from "../ui/button";
-import { List, ShoppingCart, UserRound } from "lucide-react";
+import { List, Search, ShoppingCart, UserRound } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,11 +22,25 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { useRouter } from "next/navigation";
 
-export const HeaderComponent = () => {
+export const HeaderHome = () => {
   const { scrollY } = useScroll();
   const [color, setColor] = React.useState(false);
   const [searchVisible, setSearchVisible] = React.useState(false);
+  const [search, setSearch] = React.useState("");
+  const router = useRouter();
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!search) return;
+    const formattedSearch = search.replace(/\s/g, "-");
+    router.push(`/busca/${formattedSearch}`);
+  };
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 400) {
@@ -247,14 +261,25 @@ export const HeaderComponent = () => {
         transition={{ duration: 0.1, ease: "easeIn" }}
         className="fixed w-full z-10 top-16 bg-white shadow-md"
       >
-        <div className="max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto pb-4">
-          <label className="input input-bordered bg-white input-md h-10 flex items-center gap-2 w-3/6 mx-auto rounded-full shadow-lg min-w-64 pr-0">
+        <div className="max-md:w-full md:w-5/6 max-sm:p-4 lg:w-3/4 mx-auto pb-3 pt-1">
+          <form
+            onSubmit={handleSubmit}
+            className="input input-bordered bg-white input-md h-10 flex items-center gap-2 w-1/2 mx-auto rounded-full shadow-lg min-w-64 pr-0"
+          >
             <Input
               type="text"
               placeholder="Aonde você quer ir? Hotéis, Pousadas, Cidades..."
               className="grow"
+              onChange={handleSearch}
+              value={search}
             />
-          </label>
+            <Button
+              className="rounded-full h-4/5 p-2 bg-transparent text-gray-500 hover:bg-gray-100 mr-2"
+              type="submit"
+            >
+              <Search className="w-4 h-4" />
+            </Button>
+          </form>
         </div>
       </motion.div>
     </>
